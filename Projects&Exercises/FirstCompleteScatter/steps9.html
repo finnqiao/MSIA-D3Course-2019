@@ -37,7 +37,7 @@
 
 <script>
 
-// Goal: 
+// Goal:
 // - click on button w/title and see data for just that group. For example, click on button that says group 1, and see just group 1 data plotted.
 // We'll need:
   // - buttons
@@ -83,7 +83,7 @@ function dataSwap(datasetGroup) {
       d.year = d.date.getYear() + 1900
   });
 
-  // *2* Create years array (returns [2000, 2001, ..., 2018]) 
+  // *2* Create years array (returns [2000, 2001, ..., 2018])
   var yearList = d3.set(data.map(function(d) { return d.year })).values();
 
   // What this is doing broken down:
@@ -96,7 +96,7 @@ function dataSwap(datasetGroup) {
 
   startData = data.filter(function(d) { return d.year == 2018; })
 
-    
+
   var margin = {top: 50, right: 10, bottom: 20, left: 40};
   var width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -127,7 +127,7 @@ function dataSwap(datasetGroup) {
   svg.append("g")
       .attr("class", "x axis") //gives group the classes `x` and `axis`
       .attr("transform", "translate(0," + height + ")")
-      // 
+      //
       .call(xAxis);
 
   svg.append("g")
