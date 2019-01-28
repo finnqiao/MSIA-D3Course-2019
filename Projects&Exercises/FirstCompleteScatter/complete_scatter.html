@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<style type="text/css">
+
+.axis line {
+  stroke-width:1px;
+  stroke: #ccc;
+  stroke-dasharray: 2px 2px;
+}
+
+.axis text {
+  font-size: 12px;
+  fill: #777;
+}
+
+.axis path {
+  display: none;
+}
+
+.circle-group text {
+  fill: #aaa; /*grey out text*/
+  font-size: 11px;
+}
+
+</style>
+
+<body>
+  <div id='titleDiv'></div>
+  <div id='buttonsDiv'></div>
+</body>
+
+<script>
+
+  // geting data from json
+  d3.csv("data/ufo.csv", ready)
+
+  function ready(error, data) {
+    if (error) return console.warn(error);
+
+    window.data = data;
+
+    var radius = 10;
+
+    var parseTime = d3.parseTime()
+
+
+  }
+
+
+
+
+</script>
