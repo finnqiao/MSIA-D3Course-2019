@@ -18,6 +18,7 @@ svg {
 
 <script>
 
+<<<<<<< HEAD
 var data = [
   {"date": "12/2018", "count": 233},
   {"date": "11/2018", "count": 228},
@@ -37,5 +38,86 @@ window.data = data;
 //   *************************
 //     NEW CODE GOES HERE
 //   *************************
+=======
+  var data = [
+    {"date": "12/2018", "count": 233},
+    {"date": "11/2018", "count": 228},
+    {"date": "10/2018", "count": 262},
+    {"date": "09/2018", "count": 293},
+    {"date": "08/2018", "count": 350},
+    {"date": "07/2018", "count": 400},
+    {"date": "06/2018", "count": 225},
+    {"date": "05/2018", "count": 243},
+    {"date": "04/2018", "count": 221},
+    {"date": "03/2018", "count": 235},
+    {"date": "02/2018", "count": 235},
+    {"date": "01/2018", "count": 311},
+  ];
+  window.data = data;
+
+  //   *************************
+  //     NEW CODE GOES HERE
+  //   *************************
+  data.forEach(function(d) {
+    d.count = +d.count;
+    d.month = d.date.split('/')[0]
+  });
+
+  var radius = 10;
+  var margin = {top: 20, right: 10, bottom: 20, left: 40};
+
+  var width = 960 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var xScale = d3.scaleLinear()
+    .domain([1,12])
+    .range([0 , width]) //scope of data going out / pixels
+
+  var yScale = d3.scaleLinear()
+    // .domain(d3.extent(startData, function(d) { return d.count }))
+    .domain([200, 400])
+    // .range([0, height])
+    .range([height, 0])
+
+  var xAxis = d3.axisBottom(xScale);
+  var yAxis = d3.axisLeft(yScale);
+
+  svg.append('g')
+    .attr('class','x axis')
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+  svg.append('g')
+    .attr('class','y axis')
+    .call(yAxis);
+
+  var ufoGroup = svg.selectAll('.ufoGroup')
+    .data(data).enter().append('g')
+    .attr('class', 'ufoGroup')
+
+  ufoGroup
+
+  var ufoGroup = svg.selectAll('.ufoCircle')
+    .data(data)
+    .enter().append('circle')
+    .attr('cx', function(d) { return xScale(d.month); })
+    .attr('cy', function(d) { return yScale(d.count); })
+    .attr('r', radius);
+
+  var text = svg.selectAll(".ufoText")
+    .data(data)
+    .enter().append("text")
+    .attr("x", function(d) { return xScale(d.month); })
+    .attr("y", function(d) { return yScale(d.count); })
+    .text( function (d) { return d.count; })
+    .attr('dx', -10) //moves text 10px (right) on the x axis
+    .attr('dy', -20); //moves text -10px (up) on the y axis. These help move the text so it's not overlapping with the circles
+>>>>>>> day 1
 
 </script>
