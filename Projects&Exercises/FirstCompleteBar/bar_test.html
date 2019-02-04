@@ -3,13 +3,14 @@
 <meta charset="utf-8">
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <style type="text/css">
 
 </style>
 
 <body>
-
+  <div id = #titleDiv>Test</div>
 </body>
 
 <script>
@@ -17,31 +18,89 @@
 var margin = {left: 30, right: 30, top: 30, bottom: 30};
 var width = 1000 - margin.left - margin.right;
 var height = 1000 - margin.top - margin.bottom;
-var transitionTime = 1000;
 
 var svg = d3.select("body").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`)
+  .attr("transform", `translate(${margin.left},${margin.top})`);
 
 var xScale = d3.scaleBand()
   .rangeRound([0, width]);
 var yScale = d3.scaleLinear()
-  .rangeRound([height, 0]);
+  .range([height, 0]);
 
-var xAxis = d3.axisBottom().tickSize(-height).tickPadding(30);
+var xAxis = d3.axisBottom(xScale);
 
-var yAxis = d3.axisLeft().tickSize(-width).tickPadding(30);
+var yAxis = d3.axisLeft(yScale);
 
-var xAxisGroup
+var xAxisGroup = svg.append("g")
+  .attr("class", "x axis")
+  .attr("transform", `translate(0,${height})`);
 
+var yAxisGroup = svg.append("g")
+  .attr("class", "y axis");
 
+// Main functions after reading in data
 
 d3.csv("data/ChiCrime.csv", ready)
 
 function ready(error, data) {
+  if (error) return console.warn(error);
 
+  // window.data = data;
+
+  data.forEach(d => {
+    d.count = +d.count;
+    d.year = +d.year;
+    d.violation = d['Primary Type'];
+  })
+
+  var data = data.filter(function(d) { return d.year == 2018});
+
+  xScale.domain(data.map(d => d.violation));
+  yScale.domain([0, d3.max(data, d => d.count)]);
+
+  // xAxis.scale(xScale);
+  // yAxis.scale(yScale);
+  //
+  // xAxisGroup.call(xAxis);
+  // yAxisGroup.call(yAxis);
+
+  // defining and formatting axis groups
+  var xAxisGroup = svg.append("g")
+    .attr("class","x axis")
+    .attr("transform","translate(0," + height + ")")
+    .call(xAxis);
+
+  xAxisGroup
+    .selectAll('text')
+    .attr('transform', 'rotate(45) translate(7, -8)')
+    .style('text-anchor', 'start');
+
+  var yAxisGroup = svg.append("g")
+    .attr("class","y axis")
+    .call(yAxis);
+
+  // svg.selectAll(".bar")
+  //   .data(data)
+  //   .enter()
+  //   .append('rect')
+  //   .attr("class", "bar")
+  //   .attr("x", d => d.violation)
+  //   .attr("y", d => d.count)
+  //   .attr("width", xScale.bandwidth())
+  //   .attr("height", d => (height - yScale(d.count)))
+  //   .style("fill","red")
+  svg.selectAll(".bar")
+    .data(data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function(d) { return xScale(d.violation); })
+    .attr("y", function(d) { return yScale(d.count); })
+    .attr("width", xScale.bandwidth())
+    .attr("height", function(d) { return height - yScale(d.count); })
+    .style("fill", "red")
 }
 
 
