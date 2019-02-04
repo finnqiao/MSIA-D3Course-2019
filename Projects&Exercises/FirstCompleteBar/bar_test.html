@@ -1,0 +1,57 @@
+<<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<style type="text/css">
+
+</style>
+
+<body>
+
+</body>
+
+<script>
+
+var margin = {left: 30, right: 30, top: 30, bottom: 30};
+var width = 1000 - margin.left - margin.right;
+var height = 1000 - margin.top - margin.bottom;
+var transitionTime = 1000;
+
+var svg = d3.select("body").append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin.left},${margin.top})`)
+
+var xScale = d3.scaleBand()
+  .rangeRound([0, width]);
+var yScale = d3.scaleLinear()
+  .rangeRound([height, 0]);
+
+var xAxis = d3.axisBottom().tickSize(-height).tickPadding(30);
+
+var yAxis = d3.axisLeft().tickSize(-width).tickPadding(30);
+
+var xAxisGroup
+
+
+
+d3.csv("data/ChiCrime.csv", ready)
+
+function ready(error, data) {
+
+}
+
+
+
+
+
+
+// Data to be read in has three columns
+// year, primary type, count
+
+
+
+</script>

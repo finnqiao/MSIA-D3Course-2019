@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 
 <meta charset="utf-8">
-<<<<<<< HEAD
-
-<script src="https://d3js.org/d3.v4.min.js"></script>
-=======
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
->>>>>>> 1e9d6daaec7b2d7d2e9c2a736b5960d3dd5dcc24
 
 <style type="text/css">
 
@@ -32,13 +27,6 @@
   font-size: 11px;
 }
 
-<<<<<<< HEAD
-</style>
-
-<body>
-  <div id='titleDiv'></div>
-  <div id='buttonsDiv'></div>
-=======
 button {
   margin-left: 10px;
   margin-right: 10px;
@@ -66,30 +54,10 @@ nav {
 
 <body>
   <nav id='navDiv'></nav>
->>>>>>> 1e9d6daaec7b2d7d2e9c2a736b5960d3dd5dcc24
 </body>
 
 <script>
 
-<<<<<<< HEAD
-  // geting data from json
-  d3.csv("data/ufo.csv", ready)
-
-  function ready(error, data) {
-    if (error) return console.warn(error);
-
-    window.data = data;
-
-    var radius = 10;
-
-    var parseTime = d3.parseTime()
-
-
-  }
-
-
-
-=======
 // Declaration of variables
 
 var radius = 10;
@@ -131,7 +99,7 @@ var yAxisGroup = svg.append('g')
 
 // Main ready function
 
-d3.csv("data/ufo.csv", ready)
+d3.csv("data.csv", ready)
 
 function ready(error, data) {
   if (error) return console.warn(error);
@@ -307,6 +275,5 @@ function dataSwap(year) {
   d3.select('.brand-logo')
     .text(`UFO Sightings in ${year}`)
 };
->>>>>>> 1e9d6daaec7b2d7d2e9c2a736b5960d3dd5dcc24
 
 </script>
