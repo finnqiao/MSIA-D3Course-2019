@@ -61,8 +61,14 @@ You'll notice our axes are still not showing up. This is because we have not yet
 8. Now, let's create our bars! Here's an example of what this could look like the following. Read the comments for explanation of what's
 
 ```
+<<<<<<< HEAD
   svg.selectAll(".bar")
     .data(data)
+=======
+  svg.selectAll(".bar") 
+    .data(data) 
+    .enter().append("rect")
+>>>>>>> 9b2afa316589143d897b3d5cfee03ac51e49073e
     .attr("class", "bar")
     .attr("x", function(d) { return xScale(d.violation); })
     .attr("y", function(d) { return yScale(d.count); })
